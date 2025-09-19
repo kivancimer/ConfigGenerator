@@ -1,0 +1,39 @@
+# Router Configuration Template Example
+# Copy and paste this into the Template Input area
+
+hostname {{hostname}}
+!
+interface {{interface_name}}
+ description {{description}}
+ ip address {{ip_address}} {{subnet_mask}}
+!
+{% for vlan in vlans %}
+vlan {{vlan.id}}
+ name {{vlan.name}}
+!
+{% endfor %}
+!
+{% for acl in access_lists %}
+ip access-list extended {{acl.name}}
+ {% for rule in acl.rules %}
+ {{rule.action}} {{rule.protocol}} {{rule.source}} {{rule.destination}} eq {{rule.port}}
+ {% endfor %}
+!
+{% endfor %}
+!
+router ospf {{ospf_process_id}}
+ router-id {{router_id}}
+ {% for network in ospf_networks %}
+ network {{network.address}} {{network.wildcard}} area {{network.area}}
+ {% endfor %}
+
+
+# Instructions:
+# 1. Copy this template into the Template Input area
+# 2. Click "Parse Template"
+# 3. Fill in the form fields that appear
+# 4. Click "Generate Configuration"
+# 5. Copy the generated configuration to clipboard
+
+# For the loops, you can add multiple items using the "Add Item" buttons
+# For nested loops (like ACL rules), the application will create additional form sections

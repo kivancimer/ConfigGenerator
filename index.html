@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Router Configuration Template Generator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Router Configuration Template Generator</h1>
+            <p>Create dynamic router configurations using Jinja2-style templates</p>
+        </header>
+
+        <div class="action-buttons">
+            <button id="copyConfig" disabled>Copy to Clipboard</button>
+            <button id="downloadConfig" disabled>Download as .cfg</button>
+            <button id="clearAll">Clear All</button>
+        </div>
+
+        <div class="main-content">
+            <!-- Template Input Section -->
+            <section class="template-section">
+                <h2>Template Input</h2>
+                <textarea id="templateInput" placeholder="Enter your Jinja2-style template here...
+Example:
+interface {{interface_name}}
+ description {{description}}
+ ip address {{ip_address}} {{subnet_mask}}
+{% for vlan in vlans %}
+vlan {{vlan.id}}
+ name {{vlan.name}}
+{% endfor %}"></textarea>
+            </section>
+
+            <!-- Form Generator Section -->
+            <section class="form-section">
+                <h2>Configuration Variables</h2>
+                <div id="formContainer">
+                    <p class="placeholder">Enter a template above and click 'Parse Template' to generate form fields</p>
+                </div>
+                <button id="generateConfig" disabled>Generate Configuration</button>
+            </section>
+
+            <!-- Output Section -->
+            <section class="output-section">
+                <h2>Generated Configuration</h2>
+                <div id="outputContainer">
+                    <pre id="configOutput"></pre>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script src="template-parser.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
